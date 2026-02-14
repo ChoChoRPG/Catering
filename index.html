@@ -620,7 +620,7 @@
       <div class="full-row"><label>Nama pemesan *</label><input type="text" id="nama" placeholder="contoh: Ibu Dewi"></div>
       <div><label>No. HP *</label><input type="tel" id="hp" placeholder="08123456789"></div>
       <div><label>Tanggal acara *</label><input type="date" id="tglAcara"></div>
-      <div><label>Waktu antar *</label><input type="time" id="waktuAntar" value="11:00"></div>
+      <div><label>Waktu antar *</label><input type="text" id="waktuAntar" placeholder="contoh: 11:00 atau sore hari" value=""></div>
       <div class="full-row"><label>Alamat lengkap *</label><textarea id="alamat" rows="2" placeholder="Jl. ... , rt/rw, kelurahan"></textarea></div>
       <div class="full-row"><label>Catatan (opsional)</label><textarea id="catatan" rows="1" placeholder="misal: pintu gerbang hijau"></textarea></div>
     </div>
@@ -996,7 +996,7 @@
         const nama = document.getElementById('nama').value.trim();
         const hp = document.getElementById('hp').value.trim();
         const tgl = document.getElementById('tglAcara').value;
-        const waktu = document.getElementById('waktuAntar').value;
+        const waktu = document.getElementById('waktuAntar').value.trim();
         const alamat = document.getElementById('alamat').value.trim();
         const formOk = nama && hp && tgl && waktu && alamat;
         const btn = document.getElementById('btnKirimWA');
@@ -1021,7 +1021,7 @@
         const nama = document.getElementById('nama').value.trim();
         const hp = document.getElementById('hp').value.trim();
         const tgl = document.getElementById('tglAcara').value;
-        const waktu = document.getElementById('waktuAntar').value;
+        const waktu = document.getElementById('waktuAntar').value.trim();
         const alamat = document.getElementById('alamat').value.trim();
         const catatan = document.getElementById('catatan').value.trim();
         
