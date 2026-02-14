@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Dapur Mamah AA</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #faf1e6;
+      padding: 12px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .catering-app {
+      max-width: 800px;
+      width: 100%;
+      background: #fffcf7;
+      border-radius: 32px 32px 28px 28px;
+      box-shadow: 0 20px 30px -15px #9e8269, 0 5px 15px -5px #d4b79c;
+      padding: 20px 16px 0px 16px;
+      border: 1px solid #edd2bb;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .header h1 {
+      font-weight: 450;
+      font-size: 1.9rem;
+      color: #5e4532;
+      letter-spacing: -0.5px;
+    }
+    .header .badge {
+      background: #d4b594;
+      color: #3e2b1b;
+      padding: 5px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+    .sub {
+      color: #8f725b;
+      background: #f7ebde;
+      border-radius: 25px;
+      padding: 8px 16px;
+      margin: 8px 0 20px;
+      font-size: 0.9rem;
+      border-left: 4px solid #c7a27f;
+      line-height: 1.4;
+    }
+
+    /* Form Data Diri */
+    .form-section {
+      background: #faf2e9;
+      border-radius: 28px;
+      padding: 18px 16px;
+      margin-bottom: 22px;
+      box-shadow: inset 0 2px 6px #ecdac6, 0 5px 10px #e6d2bd;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 10px;
+    }
+    .full-row { grid-column: span 2; }
+    .form-grid label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #7b5d42;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .form-grid input, .form-grid textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e7d0ba;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      background: white;
+      transition: 0.15s;
+      outline: none;
+    }
+    .form-grid input:focus, .form-grid textarea:focus {
+      border-color: #c79d77;
+      box-shadow: 0 0 0 3px #f5dbc4;
+    }
+    .form-grid textarea {
+      border-radius: 25px;
+    }
+
+    /* ===== KATEGORI CARD DENGAN FOTO DI ATAS ===== */
+    .kategori-card {
+      background: #fff9f2;
+      border-radius: 28px;
+      padding: 16px 16px;
+      margin-bottom: 18px;
+      border: 1px solid #f0decc;
+      box-shadow: 0 4px 10px #eddac7;
+    }
+
+    .kategori-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .kategori-header h3 {
+      background: #e5d1bc;
+      padding: 5px 18px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3d2d1f;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .kategori-header .harga-label {
+      background: #cfe3d4;
+      padding: 5px 16px;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #23663c;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px #b1c9b5;
+    }
+
+    /* Foto di atas - STICKY */
+    .gambar-wrapper {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #ead3bb;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 15px -6px #a78364;
+      margin-bottom: 16px;
+      position: sticky;
+      top: 8px;
+      z-index: 5;
+      transition: all 0.2s;
+      border: 2px solid #fff;
+    }
+    .gambar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    /* Pilihan menu di bawah foto - menggunakan grid 2 kolom */
+    .pilihan-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    
+    .pilihan-label {
+      font-weight: 600;
+      color: #5e4532;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    /* Desain pilihan sebagai grid 2 kolom */
+    .menu-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .menu-card {
+      background: #fcf2e6;
+      border: 2px solid #e6cfb9;
+      border-radius: 20px;
+      padding: 12px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .menu-card:hover {
+      background: #f3e2d2;
+      border-color: #c79d77;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px #e2c9b2;
+    }
+    
+    .menu-card.selected {
+      background: #dec5ab;
+      border-color: #b18763;
+      box-shadow: 0 4px 8px #dbb99a;
+    }
+    
+    .menu-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .menu-card-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .menu-name {
+      font-weight: 600;
+      color: #3d2d1f;
+      font-size: 0.95rem;
+      margin-bottom: 3px;
+    }
+    
+    .menu-desc {
+      font-size: 0.7rem;
+      color: #7b6048;
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+    
+    .menu-price {
+      font-weight: 700;
+      color: #23663c;
+      font-size: 0.85rem;
+      align-self: flex-end;
+      background: #e6f0e8;
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    /* Untuk kategori opsional (none) */
+    .menu-card.none-option {
+      background: #f5f0ea;
+      border-color: #d4c0ae;
+    }
+    .menu-card.none-option .menu-name {
+      color: #8a6f5a;
+    }
+
+    /* Checkbox tambahan dibuat grid 2 kolom */
+    .tambahan-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .tambahan-item {
+      background: #fcf2e6;
+      border: 2px solid #e6cfb9;
+      border-radius: 25px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .tambahan-item:hover {
+      background: #f3e2d2;
+    }
+    .tambahan-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #b38d6b;
+    }
+    .tambahan-item span {
+      font-size: 0.85rem;
+    }
+    .tambahan-item small {
+      font-size: 0.7rem;
+    }
+
+    /* Tombol jumlah dan tambah - TIDAK STICKY */
+    .action-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: #f0decf;
+      border-radius: 60px;
+      padding: 14px 20px;
+      margin: 20px 0 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .qty-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .qty-box span {
+      font-weight: 500;
+      color: #4f3c2b;
+      font-size: 0.9rem;
+    }
+    .qty-box input {
+      width: 70px;
+      padding: 10px;
+      border-radius: 40px;
+      border: 2px solid #b58f6e;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .btn-tambah {
+      background: #b28b68;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      box-shadow: 0 5px 0 #745e48;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .btn-tambah:active { transform: translateY(3px); box-shadow: 0 2px 0 #745e48; }
+
+    /* Daftar pesanan */
+    .order-section {
+      background: #f8ecdf;
+      border-radius: 30px;
+      padding: 18px 16px;
+      margin: 20px 0;
+    }
+    .order-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .order-item {
+      background: white;
+      border-radius: 40px;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .order-desc { 
+      font-weight: 500;
+      flex: 1;
+      min-width: 160px;
+      font-size: 0.9rem;
+    }
+    .order-price { 
+      color: #2d7341; 
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .order-actions {
+      display: flex;
+      gap: 5px;
+    }
+    .order-actions button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #8b684b;
+      padding: 0 3px;
+    }
+    .grandtotal {
+      text-align: right;
+      background: #d7c1aa;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1e582b;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn-final {
+      background: #3c784b;
+      border: none;
+      width: 100%;
+      padding: 16px;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 3px #1a4d25;
+      box-shadow: 0 10px 15px -8px #2b6a38;
+      cursor: pointer;
+      transition: 0.1s;
+      margin-top: 8px;
+    }
+    .btn-final:disabled {
+      background: #b8aa9b;
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .btn-final:not(:disabled):hover {
+      background: #4c8e5d;
+      transform: scale(1.01);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 25px;
+      padding: 15px 0 10px 0;
+      text-align: center;
+      border-top: 1px dashed #e0cbb5;
+      font-size: 0.85rem;
+      color: #9b8269;
+    }
+    
+    .footer .credit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    
+    .footer .heart {
+      color: #e07c5c;
+      animation: pulse 1.5s infinite;
+      display: inline-block;
+    }
+    
+    .footer .author {
+      font-weight: 600;
+      color: #b28b68;
+      background: #fcf2e6;
+      padding: 3px 12px;
+      border-radius: 30px;
+      display: inline-block;
+      border: 1px solid #e6cfb9;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .footer small {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    /* Responsive untuk mobile */
+    @media (max-width: 600px) {
+      .form-grid { 
+        grid-template-columns: 1fr; 
+        gap: 10px;
+      }
+      .full-row { grid-column: span 1; }
+      
+      .menu-grid-2 { 
+        grid-template-columns: 1fr; 
+        gap: 8px;
+      }
+      
+      .tambahan-grid { 
+        grid-template-columns: 1fr; 
+        gap: 8px;
+      }
+      
+      .gambar-wrapper {
+        top: 5px;
+        border-radius: 18px;
+      }
+      
+      .action-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        padding: 14px;
+        border-radius: 40px;
+      }
+      
+      .qty-box {
+        justify-content: space-between;
+        width: 100%;
+      }
+      
+      .qty-box input {
+        width: 60px;
+      }
+      
+      .btn-tambah {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+      
+      .kategori-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .kategori-header h3 {
+        font-size: 0.95rem;
+        padding: 4px 14px;
+      }
+      
+      .kategori-header .harga-label {
+        align-self: flex-end;
+        font-size: 0.85rem;
+        padding: 4px 14px;
+      }
+      
+      .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      
+      .order-actions {
+        align-self: flex-end;
+      }
+      
+      .grandtotal {
+        font-size: 1.4rem;
+        padding: 8px 20px;
+      }
+      
+      .btn-final {
+        font-size: 1.2rem;
+        padding: 14px;
+      }
+      
+      .header h1 {
+        font-size: 1.7rem;
+      }
+      
+      .sub {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+      }
+      
+      .footer {
+        margin-top: 20px;
+        padding: 12px 0 8px 0;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Untuk layar sangat kecil */
+    @media (max-width: 380px) {
+      .menu-name {
+        font-size: 0.9rem;
+      }
+      
+      .menu-price {
+        font-size: 0.8rem;
+        padding: 2px 6px;
+      }
+      
+      .tambahan-item {
+        padding: 8px 10px;
+      }
+      
+      .tambahan-item span {
+        font-size: 0.8rem;
+      }
+      
+      .qty-box span {
+        font-size: 0.85rem;
+      }
+      
+      .qty-box input {
+        width: 55px;
+        padding: 8px;
+      }
+      
+      .footer .author {
+        font-size: 0.75rem;
+        padding: 2px 10px;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+<div class="catering-app">
+  <div class="header">
+    <h1>DAHAR • Dapur Hangat </h1>
+    <div class="badge">catering keluarga</div>
+  </div>
+  <div class="sub">📋 lengkapi data & pilih menu • setiap kombinasi bisa ditambah</div>
+
+  <!-- FORM DATA PEMESANAN -->
+  <div class="form-section">
+    <div class="form-grid">
+      <div class="full-row"><label>Nama pemesan *</label><input type="text" id="nama" placeholder="contoh: Ibu Dewi"></div>
+      <div><label>No. HP *</label><input type="tel" id="hp" placeholder="08123456789"></div>
+      <div><label>Tanggal acara *</label><input type="date" id="tglAcara"></div>
+      <div><label>Waktu antar *</label><input type="time" id="waktuAntar" value="11:00"></div>
+      <div class="full-row"><label>Alamat lengkap *</label><textarea id="alamat" rows="2" placeholder="Jl. ... , rt/rw, kelurahan"></textarea></div>
+      <div class="full-row"><label>Catatan (opsional)</label><textarea id="catatan" rows="1" placeholder="misal: pintu gerbang hijau"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ===== KATEGORI MENU AKAN DIRENDER OLEH JAVASCRIPT ===== -->
+  <div id="kategoriContainer"></div>
+
+  <!-- TOMBOL JUMLAH & TAMBAH - TIDAK STICKY -->
+  <div class="action-bar">
+    <div class="qty-box">
+      <span>Jumlah box</span>
+      <input type="number" id="qtyBox" min="1" value="1">
+    </div>
+    <button class="btn-tambah" id="tambahKeDaftar">➕ Tambah ke pesanan</button>
+  </div>
+
+  <!-- DAFTAR PESANAN -->
+  <div class="order-section">
+    <div style="font-weight:600; margin-bottom:12px;">🛒 daftar pesanan</div>
+    <div id="listPesanan" class="order-list"></div>
+    <div id="grandTotalDisplay" class="grandtotal">Rp 0</div>
+  </div>
+
+  <!-- TOMBOL WHATSAPP -->
+  <button class="btn-final" id="btnKirimWA" disabled>📲 Pesan Sekarang via WA</button>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="credit">
+      <span>Dibuat dengan</span>
+      <span class="heart">❤️</span>
+      <span>oleh</span>
+      <span class="author">eRGPy</span>
+    </div>
+    <small>© 2026 Dapur Hangat • Catering Keluarga</small>
+  </div>
+
+  <script>
+    (function() {
+        "use strict";
+      // ============================================================
+      // DATA MENU - MUDAH DIUBAH DAN DITAMBAH
+      // ============================================================
+        const menuData = {
+        nasi: [
+            { id: 'nasi1', name: 'Nasi Putih', desc: 'beras lokal pulen', harga: 4000, img: 'img/nasiPutih.jpeg' },
+            { id: 'nasi2', name: 'Nasi Uduk', desc: 'harum santan', harga: 5000, img: 'img/nasiUduk.jpeg' },
+            { id: 'nasi3', name: 'Nasi Daun Jeruk', desc: 'aroma daun jeruk segar', harga: 6000, img: 'img/nasiDaunJeruk.jpeg' },
+            { id: 'nasi4', name: 'Nasi Kuning', desc: 'gurih kunyit khas acara', harga: 5000, img: 'img/nasiKuning.jpeg' },
+            { id: 'nasi5', name: 'Nasi Liwet', desc: 'khas solo gurih santan', harga: 8000, img: 'img/nasiLiwet.jpeg' },
+            { id: 'nasi6', name: 'Nasi Goreng Polos', desc: 'tanpa lauk cocok catering', harga: 7000, img: 'img/nasiGoreng.jpeg' },
+        ],
+        lauk: [
+            { id: 'lauk1', name: 'Ayam Goreng', desc: 'paha + kulit gurih', harga: 12000, img: 'img/ayamGoreng.jpeg' },
+            { id: 'lauk2', name: 'Ayam Bakar', desc: 'bumbu manis meresap', harga: 13000, img: 'img/ayamBakar.jpeg' },
+            { id: 'lauk3', name: 'Rendang Sapi', desc: 'daging empuk bumbu pekat', harga: 18000, img: 'img/rendangSapi.jpeg' },
+            { id: 'lauk4', name: 'Semur Daging', desc: 'manis gurih kecap', harga: 15000, img: 'img/semurDaging.jpeg' },
+            { id: 'lauk5', name: 'Ikan Bakar', desc: 'bumbu kuning + sambal', harga: 15000, img: 'img/ikanBakar.jpeg' },
+            { id: 'lauk6', name: 'Ikan Goreng', desc: 'crispy gurih', harga: 13000, img: 'img/ikanGoreng.jpeg' },
+            { id: 'lauk7', name: 'Telur Balado', desc: 'telur + sambal merah', harga: 8000, img: 'img/telurBalado.jpeg' },
+            { id: 'lauk8', name: 'Telur Dadar Iris', desc: 'tipis potong kotak', harga: 7000, img: 'img/telurDadarIris.jpeg' },
+            { id: 'lauk9', name: 'Tempe Sambel', desc: 'manis gurih kering', harga: 6000, img: 'img/tempeSambel.jpeg' },
+            { id: 'lauk10', name: 'Tahu Goreng Balado', desc: 'renyah di luar lembut', harga: 5000, img: 'img/tahuBalado.jpeg' }
+        ],
+        sublauk: [
+            { id: 'sub1', name: 'Tumis Buncis', desc: 'sayur segar ringan', harga: 4000, img: 'img/tumisBuncis.jpeg' },
+            { id: 'sub2', name: 'Perkedel Kentang', desc: 'lembut gurih', harga: 5000, img: 'img/perkedelKentang.jpeg' },
+            { id: 'sub3', name: 'Tahu Bacem', desc: 'manis gurih jawa', harga: 3000, img: 'img/tahuBacem.jpeg' },
+            { id: 'sub4', name: 'Tempe Goreng', desc: 'tipis renyah', harga: 3000, img: 'img/tempeGoreng.jpeg' },
+            { id: 'sub5', name: 'Mie Goreng Simple', desc: 'porsi kecil pelengkap', harga: 4000, img: 'img/mieGoreng.jpeg' },
+            { id: 'sub6', name: 'Oseng Wortel Kol', desc: 'sayur tumis ringan', harga: 4000, img: 'img/osengWortelKol.jpeg' },
+            { id: 'sub7', name: 'Capcay Sayur', desc: 'aneka sayur segar', harga: 5000, img: 'img/capcay.jpeg' },
+            { id: 'sub8', name: 'Bihun Goreng', desc: 'bihun gurih', harga: 4000, img: 'img/bihunGoreng.jpeg' },
+            { id: 'sub9', name: 'Kentang Mustofa', desc: 'kering kentang pedas manis', harga: 5000, img: 'img/kentangMustofa.jpeg' },
+            { id: 'sub10', name: 'Ati Balado', desc: 'Ati dengan sambal balado', harga: 6000, img: 'img/atiBalado.jpeg' },
+            { id: 'sub11', name: 'Acar Kuning', desc: 'timun wortel segar', harga: 3000, img: 'img/acarKuning.jpeg' },
+            { id: 'sub12', name: 'Kerupuk Kulit', desc: 'kerupuk rambak', harga: 2000, img: 'img/kerupukKulit.jpg' },
+            { id: 'sub13', name: 'Tumis Kangkung', desc: 'kangkung belacan', harga: 4000, img: 'img/tumisKangkung.jpeg' },
+            { id: 'sub14', name: 'Tumis Labu Siam', desc: 'labu siam iris tipis', harga: 4000, img: 'img/tumisLabuSiam.jpeg' },
+            { id: 'sub15', name: 'Bakwan Jagung', desc: 'gorengan jagung', harga: 3500, img: 'img/bakwanJagung.jpeg' },
+            { id: 'sub16', name: 'Peyek Kacang', desc: 'rempeyek kacang', harga: 2500, img: 'img/peyekKacang.jpg' },
+            { id: 'sub17', name: 'Abon Sapi', desc: 'abon gurih', harga: 5000, img: 'img/abonSapi.jpeg' },
+            { id: 'sub18', name: 'Serundeng Kelapa', desc: 'kelapa goreng gurih', harga: 3000, img: 'img/serundengKelapa.jpeg' },
+        ],
+        sambal: [
+            { id: 'samb1', name: 'Sambal Terasi', desc: 'pedas manis khas', harga: 2000, img: 'img/sambalTerasi.jpeg' },
+            { id: 'samb2', name: 'Sambal Hijau', desc: 'pedas segar', harga: 2000, img: 'img/sambalHijau.jpeg' },
+            { id: 'samb3', name: 'Sambal Matah', desc: 'khas bali segar', harga: 3000, img: 'img/sambalMatah.jpeg' },
+            { id: 'samb4', name: 'Sambal Tomat', desc: 'segar asam pedas', harga: 2000, img: 'img/sambalTomat.jpeg' },
+            { id: 'samb5', name: 'Sambal Bajak', desc: 'pedas manis gurih', harga: 2500, img: 'img/sambalBajak.jpeg' },
+            { id: 'samb6', name: 'Sambal Dabu-dabu', desc: 'khas manado segar', harga: 3000, img: 'img/sambalDabuDabu.jpeg' },
+            { id: 'samb7', name: 'Sambal Kecap', desc: 'iris cabe + kecap', harga: 1500, img: 'img/sambalKecap.jpeg' },
+            { id: 'samb8', name: 'Sambal Pecel', desc: 'bumbu kacang pedas', harga: 3000, img: 'img/sambalPecel.jpeg' },
+            { id: 'samb9', name: 'Sambal Bangkok', desc: 'pedas manis kental', harga: 2500, img: 'img/sambalBangkok.jpeg' },
+            { id: 'samb10', name: 'Sambal Andaliman', desc: 'khas batak pedas khas', harga: 3500, img: 'img/sambalAndaliman.jpeg' },
+            { id: 'samb11', name: 'Sambal Cabe Rawit', desc: 'cabe rawit utuh', harga: 1500, img: 'img/sambalRawit.jpeg' },
+            { id: 'samb12', name: 'Sambal Petai', desc: 'pedas + petai', harga: 4000, img: 'img/sambalPetai.jpeg' },
+        ],
+        box: [
+            { id: 'box1', name: 'Box Kertas', desc: 'ramah lingkungan', harga: 2500, img: 'img/boxKertas.jpeg' },
+            { id: 'box2', name: 'Box Sterofoam', desc: 'ekonomis', harga: 1000, img: 'img/boxSterofoam.jpg' },
+            { id: 'box3', name: 'Box Mica', desc: 'premium bening', harga: 3500, img: 'img/boxMika.jpg' },
+            { id: 'box4', name: 'Box Thinwall', desc: 'Plastik thinwall', harga: 3000, img: 'img/boxThinwall.jpeg' },
+            ]
+        };
+
+      const tambahanData = [
+        { id: 'tmb1', name: 'Sendok & Garpu', harga: 500 },
+        { id: 'tmb2', name: 'Air Mineral 600ml', harga: 3000 },
+        { id: 'tmb3', name: 'Kerupuk Udang', harga: 2000 },
+        { id: 'tmb4', name: 'Buah Potong', harga: 4000 },
+        { id: 'tmb5', name: 'Sambal Ekstra', harga: 2000 },
+        { id: 'tmb6', name: 'Lalapan', harga: 3000 }
+      ];
+
+      // KONFIGURASI KATEGORI
+      const kategoriList = [
+        { key: 'nasi', label: 'Jenis Nasi', icon: '🍚', wajib: true },
+        { key: 'lauk', label: 'Pilihan Lauk Utama', icon: '🍗', wajib: true },
+        { key: 'sublauk', label: 'Opsional Tambahan Sub Lauk', icon: '🥗', wajib: false },
+        { key: 'sambal', label: 'Pilihan Sambal', icon: '🌶️', wajib: false },
+        { key: 'box', label: 'Jenis Box', icon: '📦', wajib: true }
+      ];
+
+      // RENDER SEMUA KATEGORI
+      const container = document.getElementById('kategoriContainer');
+      
+      function renderSemuaKategori() {
+        let html = '';
+
+        kategoriList.forEach(k => {
+          const items = menuData[k.key];
+          const defaultItem = items[0];
+          const wajibText = k.wajib ? 'wajib' : 'opsional';
+
+          html += `<div class="kategori-card" data-kategori="${k.key}" id="kategori-${k.key}">`;
+          html += `<div class="kategori-header">`;
+          html += `<h3>${k.icon} ${k.label} <span style="font-size:0.7rem; background:#f0d5c0; padding:2px 10px; border-radius:20px;">${wajibText}</span></h3>`;
+          html += `<span class="harga-label" id="harga-${k.key}">Rp0</span>`;
+          html += `</div>`;
+
+          // FOTO DI ATAS - STICKY
+          html += `<div class="gambar-wrapper" id="gambar-${k.key}">`;
+          html += `<img id="img-${k.key}" src="${defaultItem.img}" alt="${k.label}" style="transition: opacity 0.2s;">`;
+          html += `</div>`;
+
+          // PILIHAN MENU DI BAWAH FOTO - GRID 2 KOLOM
+          html += `<div class="pilihan-wrapper">`;
+          html += `<div class="pilihan-label">Pilih ${k.label}:</div>`;
+          html += `<div class="menu-grid-2" id="grid-${k.key}">`;
+          
+          if (!k.wajib) {
+            html += `
+              <label class="menu-card none-option">
+                <input type="radio" name="${k.key}" value="none" data-harga="0" data-img="" checked>
+                <span class="menu-card-content">
+                  <span class="menu-name">✖️ Tidak ambil</span>
+                </span>
+              </label>
+            `;
+          }
+          
+          items.forEach(item => {
+            html += `
+              <label class="menu-card">
+                <input type="radio" name="${k.key}" value="${item.name}" data-harga="${item.harga}" data-img="${item.img}" data-desc="${item.desc}">
+                <span class="menu-card-content">
+                  <span class="menu-name">${item.name}</span>
+                  <span class="menu-desc">${item.desc}</span>
+                  <span class="menu-price">+${item.harga.toLocaleString()}</span>
+                </span>
+              </label>
+            `;
+          });
+          
+          html += `</div>`; // tutup menu-grid-2
+          html += `</div>`; // tutup pilihan-wrapper
+          html += `</div>`; // tutup kategori-card
+        });
+
+        // KATEGORI TAMBAHAN (checkbox dengan grid 2 kolom)
+        html += `<div class="kategori-card">`;
+        html += `<div class="kategori-header">`;
+        html += `<h3>➕ Tambahan Opsional</h3>`;
+        html += `<span class="harga-label" id="harga-tambahan">Rp0</span>`;
+        html += `</div>`;
+        
+        html += `<div class="tambahan-grid" id="group-tambahan">`;
+        tambahanData.forEach(t => {
+          html += `<label class="tambahan-item">`;
+          html += `<input type="checkbox" class="cb-tambahan" data-harga="${t.harga}" data-name="${t.name}">`;
+          html += `<span><strong>${t.name}</strong><br><small>+${t.harga.toLocaleString()}</small></span>`;
+          html += `</label>`;
+        });
+        html += `</div>`;
+        html += `</div>`;
+
+        container.innerHTML = html;
+      }
+      
+      renderSemuaKategori();
+
+      // ============================================================
+      // FUNGSI-FUNGSI INTERAKSI
+      // ============================================================
+      
+      // Update gambar saat radio button berubah
+      function attachEvents() {
+        // Event listener untuk semua radio button
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+          radio.addEventListener('change', function(e) {
+            // Ambil nama kategori dari atribut name
+            const kategori = this.getAttribute('name');
+            
+            // Cari gambar yang sesuai dengan kategori ini
+            const imgElement = document.getElementById(`img-${kategori}`);
+            
+            if (imgElement && this.dataset.img) {
+              if (this.value !== 'none' && this.dataset.img) {
+                imgElement.src = this.dataset.img;
+              } else if (this.value === 'none') {
+                // Gambar default jika pilih "tidak ambil"
+                imgElement.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\' viewBox=\'0 0 400 300\'%3E%3Crect width=\'400\' height=\'300\' fill=\'%23eedac6\'/%3E%3Ctext x=\'50\' y=\'160\' font-size=\'26\' fill=\'%23907962\'%3E🍽️ tidak dipilih%3C/text%3E%3C/svg%3E';
+              }
+            }
+            
+            // Highlight card yang dipilih
+            const parentGrid = this.closest('.menu-grid-2');
+            if (parentGrid) {
+              parentGrid.querySelectorAll('.menu-card').forEach(card => {
+                card.classList.remove('selected');
+              });
+            }
+            if (this.checked) {
+              this.closest('.menu-card').classList.add('selected');
+            }
+            
+            updateHargaPerKategori();
+          });
+        });
+
+        // checkbox tambahan
+        document.querySelectorAll('.cb-tambahan').forEach(cb => {
+          cb.addEventListener('change', updateHargaPerKategori);
+        });
+        
+        // Set default selected untuk yang checked
+        setTimeout(() => {
+          document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+            if (radio.closest('.menu-card')) {
+              radio.closest('.menu-card').classList.add('selected');
+            }
+          });
+        }, 100);
+      }
+
+      // Update tampilan harga per kategori
+      function updateHargaPerKategori() {
+        kategoriList.forEach(k => {
+          const selected = document.querySelector(`input[name="${k.key}"]:checked`);
+          const harga = selected ? parseInt(selected.dataset.harga || 0) : 0;
+          const span = document.getElementById(`harga-${k.key}`);
+          if (span) span.innerText = `Rp${harga.toLocaleString()}`;
+        });
+
+        let totalTambahan = 0;
+        document.querySelectorAll('.cb-tambahan:checked').forEach(cb => {
+          totalTambahan += parseInt(cb.dataset.harga);
+        });
+        const spanTambahan = document.getElementById('harga-tambahan');
+        if (spanTambahan) spanTambahan.innerText = `Rp${totalTambahan.toLocaleString()}`;
+      }
+
+      // Hitung harga satuan kombinasi saat ini
+      function hitungHargaSatuan() {
+        let total = 0;
+        kategoriList.forEach(k => {
+          total += getRadioHarga(k.key);
+        });
+        document.querySelectorAll('.cb-tambahan:checked').forEach(cb => { 
+          total += parseInt(cb.dataset.harga); 
+        });
+        return total;
+      }
+
+      function getRadioHarga(name) {
+        const r = document.querySelector(`input[name="${name}"]:checked`);
+        return r ? parseInt(r.dataset.harga || 0) : 0;
+      }
+
+      function getRadioValue(name) {
+        const r = document.querySelector(`input[name="${name}"]:checked`);
+        return r ? r.value : '';
+      }
+
+      // ============================================================
+      // PESANAN MULTI KOMBINASI
+      // ============================================================
+      let pesanan = [];
+
+      function renderOrderList() {
+        const container = document.getElementById('listPesanan');
+        let totalAll = 0;
+        let html = '';
+        pesanan.forEach((p, idx) => {
+          const sub = p.harga * p.qty;
+          totalAll += sub;
+          html += `<div class="order-item">
+            <div class="order-desc">${p.qty} box: ${p.desc}</div>
+            <div class="order-price">Rp${sub.toLocaleString()}</div>
+            <div class="order-actions">
+              <button onclick="window.editPesanan(${idx})" title="Edit (hapus lalu tambah baru)">✏️</button>
+              <button onclick="window.hapusPesanan(${idx})" title="Hapus">🗑️</button>
+            </div>
+          </div>`;
+        });
+        container.innerHTML = html || '<div style="padding:15px;text-align:center;color:#8e6f55;background:#f8ece0;border-radius:30px;font-size:0.9rem;">— belum ada pesanan —</div>';
+        document.getElementById('grandTotalDisplay').innerText = 'Rp ' + totalAll.toLocaleString();
+        validateFormAndButton();
+      }
+
+      window.hapusPesanan = (idx) => { 
+        pesanan.splice(idx, 1); 
+        renderOrderList(); 
+      };
+      
+      window.editPesanan = (idx) => { 
+        hapusPesanan(idx);
+        alert('Silakan tambah ulang dengan pilihan baru');
+      };
+
+      // TOMBOL TAMBAH
+      document.getElementById('tambahKeDaftar').addEventListener('click', function() {
+        const nasiVal = getRadioValue('nasi');
+        const laukVal = getRadioValue('lauk');
+        const boxVal = getRadioValue('box');
+        
+        if (!nasiVal || nasiVal === 'none' || !laukVal || laukVal === 'none' || !boxVal || boxVal === 'none') { 
+          alert('Nasi, lauk utama, dan jenis box wajib dipilih!'); 
+          return; 
+        }
+
+        const qty = parseInt(document.getElementById('qtyBox').value) || 1;
+        if (qty < 1) return;
+
+        let desc = `${nasiVal}, ${laukVal}`;
+        
+        const subVal = getRadioValue('sublauk');
+        const sambVal = getRadioValue('sambal');
+        
+        if (subVal && subVal !== 'none') desc += `, ${subVal}`;
+        if (sambVal && sambVal !== 'none') desc += `, ${sambVal}`;
+        desc += `, box: ${boxVal}`;
+        
+        document.querySelectorAll('.cb-tambahan:checked').forEach(cb => {
+          desc += `, ${cb.dataset.name}`;
+        });
+
+        const hargaSatuan = hitungHargaSatuan();
+        pesanan.push({ qty, desc, harga: hargaSatuan });
+        renderOrderList();
+      });
+
+      // VALIDASI FORM & BUTTON
+      function validateFormAndButton() {
+        const nama = document.getElementById('nama').value.trim();
+        const hp = document.getElementById('hp').value.trim();
+        const tgl = document.getElementById('tglAcara').value;
+        const waktu = document.getElementById('waktuAntar').value;
+        const alamat = document.getElementById('alamat').value.trim();
+        const formOk = nama && hp && tgl && waktu && alamat;
+        const btn = document.getElementById('btnKirimWA');
+        
+        // Tombol aktif jika form OK dan ada pesanan
+        btn.disabled = !(formOk && pesanan.length > 0);
+      }
+
+      // Event listener untuk input form
+      document.getElementById('nama').addEventListener('input', validateFormAndButton);
+      document.getElementById('hp').addEventListener('input', validateFormAndButton);
+      document.getElementById('tglAcara').addEventListener('input', validateFormAndButton);
+      document.getElementById('waktuAntar').addEventListener('input', validateFormAndButton);
+      document.getElementById('alamat').addEventListener('input', validateFormAndButton);
+      document.getElementById('catatan').addEventListener('input', validateFormAndButton);
+
+      // KIRIM WHATSAPP - DENGAN FORMAT BARU SESUAI PERMINTAAN
+      document.getElementById('btnKirimWA').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Ambil data pemesan
+        const nama = document.getElementById('nama').value.trim();
+        const hp = document.getElementById('hp').value.trim();
+        const tgl = document.getElementById('tglAcara').value;
+        const waktu = document.getElementById('waktuAntar').value;
+        const alamat = document.getElementById('alamat').value.trim();
+        const catatan = document.getElementById('catatan').value.trim();
+        
+        // Validasi ulang
+        if (!nama || !hp || !tgl || !waktu || !alamat) {
+          alert('Harap lengkapi semua data pemesan terlebih dahulu!');
+          return;
+        }
+        
+        if (pesanan.length === 0) {
+          alert('Harap tambahkan minimal satu pesanan!');
+          return;
+        }
+        
+        // Format tanggal agar lebih rapi (DD/MM/YYYY)
+        let tglFormatted = tgl;
+        if (tgl) {
+          const parts = tgl.split('-');
+          if (parts.length === 3) {
+            tglFormatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+          }
+        }
+        
+        // Mulai membangun pesan sesuai format yang diminta
+        let msg = `Halo mamah aa,\n`;
+        msg += `Saya ${nama}, \nNomor HP: ${hp} \nTanggal Pesanan: ${tglFormatted} (jam ${waktu}) \nKe alamat: ${alamat}`;
+        
+        if (catatan) {
+          msg += ` ${catatan}`;
+        }
+        msg += `\n`;
+        
+        // Tambahkan setiap pesanan
+        pesanan.forEach(p => {
+          msg += `\nmau pesen ${p.desc} \nsebanyak ${p.qty} box \n`;
+        });
+        
+        // Total pesanan
+        const total = pesanan.reduce((s,p) => s + (p.harga * p.qty), 0);
+        msg += `\ntotal pesanan sebanyak Rp${total.toLocaleString()}`;
+        
+        // Encode untuk URL - menggunakan format seperti contoh
+        const encodedMsg = encodeURIComponent(msg);
+        const waUrl = `https://wa.me/6281214367926?text=${encodedMsg}`;
+        
+        // Buka di tab baru
+        window.open(waUrl, '_blank');
+      });
+
+      // INIT
+      attachEvents();
+      updateHargaPerKategori();
+      renderOrderList();
+      validateFormAndButton();
+    })();
+  </script>
+</div>
+</body>
+</html>
